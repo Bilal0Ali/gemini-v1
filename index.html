@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* General Styling */
+        :root {
+            --bg-dark: #1a1a2e;
+            --text-light: #e0e0e0;
+            --accent-color: #0f3460;
+            --secondary-accent: #e94560;
+            --card-bg: #2a2a4a;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Scroll behavior for smooth transitions */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Headings */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-accent);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--secondary-accent);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-accent);
+            transform: translateY(-3px);
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative; /* For hero section positioning */
+            overflow: hidden; /* To contain background elements */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-size: 1.1em;
+            padding: 5px 10px;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-accent);
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            padding: 100px 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-section h1 {
+            margin-bottom: 10px;
+            animation: slideInFromTop 1s ease-out forwards;
+            opacity: 0; /* Start hidden */
+            animation-delay: 0.5s;
+        }
+
+        .hero-section .tagline {
+            font-size: 1.8em;
+            color: var(--accent-color);
+            font-style: italic;
+            animation: scaleIn 1s ease-out forwards;
+            opacity: 0; /* Start hidden */
+            animation-delay: 1s;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 1.1em;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-item {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-item h3 {
+            color: var(--secondary-accent);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .project-item p {
+            flex-grow: 1; /* Allow description to take available space */
+            margin-bottom: 20px;
+        }
+
+        .project-links a {
+            margin-right: 15px;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+
+        .project-links a:hover {
+            color: var(--secondary-accent);
+        }
+
+        /* Resume Section */
+        #resume p {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Contact Section */
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 15px;
+        }
+
+        #contact input,
+        #contact textarea {
+            padding: 15px;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-light);
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: var(--secondary-accent);
+            outline: none;
+        }
+
+        #contact textarea {
+            resize: vertical;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+
+        .contact-info a {
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.8em;
+            margin: 0 15px;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-accent);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInFromTop {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Fade-in on scroll (JavaScript will add 'show' class) */
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero-section {
+                padding: 80px 20px;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .hero-section .tagline {
+                font-size: 1.4em;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero-section">
+            <h1>[Your Name Here]</h1>
+            <p class="tagline">I don't code. I just vibe.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>Hello! I'm [Your Name], a Master's in Economics student with a deep passion for the intersection of data, design, and development. I love transforming complex ideas into clean, functional code and visually appealing web experiences. My journey in economics has sharpened my analytical skills, which I now channel into building intuitive and efficient web solutions.</p>
+            <p>When I'm not diving into economic models or crafting lines of code, you can find me exploring new design trends or contributing to open-source projects.</p>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <div class="project-item">
+                    <h3>Project Title 1</h3>
+                    <p>A brief description of your first project. Highlight its purpose, technologies used, and your role.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <h3>Project Title 2</h3>
+                    <p>Another project description. What did you learn? What problem did it solve?</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section id="resume" class="section">
+            <h2>Resume</h2>
+            <p>Download my full resume to learn more about my experience and skills.</p>
+            <a href="your_resume.pdf" target="_blank" class="btn">Download Resume</a>
+            </section>
+
+        <section id="contact" class="section">
+            <h2>Get in Touch</h2>
+            <p>Have a question or just want to chat? Feel free to reach out!</p>
+            <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <p class="contact-info">
+                Email: <a href="mailto:your.email@example.com">your.email@example.com</a><br>
+                LinkedIn: <a href="https://www.linkedin.com/in/yourprofile/" target="_blank">linkedin.com/in/yourprofile</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/yourusername/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Smooth scroll for navigation links (optional, as CSS scroll-behavior does most of the job)
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
